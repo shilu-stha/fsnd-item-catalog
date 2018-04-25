@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
+		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+	</head>
+	<body>
+		<div class="banner main">
+			<img class="banner logo" src="static/banner-image.png"/>  
+			<h3>Login/SignUp</h3>          
+		</div>		
+		<button class="tablink" onclick="openPage('Login', this)" id="defaultOpen">Login</button>
+		<button class="tablink" onclick="openPage('SignUp', this)">SignUp</button>
+
+		<div class="container">
+			<div id="Login" class="tabcontent">
+  				<label for="uname"><b>Username</b></label>
+	      		<input type="text" placeholder="Enter Username" name="uname" required>
+
+	      		<label for="password"><b>Password</b></label>
+	      		<input type="password" placeholder="Enter Password" name="password" required>
+	        
+	      		<button type="submit">Login</button>
+			</div>
+
+			<div id="SignUp" class="tabcontent">
+			  	<label for="name"><b>Full Name</b></label>
+		      	<input type="text" placeholder="Enter Full Name" name="name" required>
+
+				<label for="uname"><b>Username</b></label>
+	      		<input type="text" placeholder="Enter Username" name="uname" required>
+
+	      		<label for="password"><b>Password</b></label>
+	      		<input type="password" placeholder="Enter Password" name="password" required>
+	        
+	      		<button type="submit">SignUp</button>
+			</div>
+			
+		</div>
+
+		<script>
+			function openPage(evt, cityName) {
+			    var i, tabcontent, tablinks;
+			    tabcontent = document.getElementsByClassName("tabcontent");
+			    for (i = 0; i < tabcontent.length; i++) {
+			        tabcontent[i].style.display = "none";
+			    }
+			    tablinks = document.getElementsByClassName("tablinks");
+			    for (i = 0; i < tablinks.length; i++) {
+			        tablinks[i].className = tablinks[i].className.replace(" active", "");
+			    }
+			    document.getElementById(cityName).style.display = "block";
+			    evt.currentTarget.className += " active";
+			}
+		</script>
+	</body>
+</html>

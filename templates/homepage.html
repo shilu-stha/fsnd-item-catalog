@@ -1,0 +1,38 @@
+{% extends "header.html" %}
+{% block content %}
+
+	<a href="{{url_for('addNewItem')}}">
+		<button>
+			Add Item
+		</button>
+	</a>
+	<div class = 'leftpane'>
+		<h2>Categories</h2>
+
+		{% for category in categories %}
+		<div>
+			<a href = "{{url_for('showCategoryAndItems', category_id = category.id, category_name = category.name)}}"><h3>{{category.name}}</h3></a>
+		</div>
+		{% endfor %}
+
+	</div>
+
+	<div class = 'rightpane'>
+		<h2>Latest Items</h2>
+
+		{% for item in latest %}
+		<div>
+			{% for category in categories %}
+				{% if item.category_id == category.id %}
+				<a href = "{{url_for('showSpecificItem', category_name = category.name, item_name = item.name)}}">
+					<h3>{{item.name}}({{category.name}})</h3>
+				</a>
+				{% endif %}
+			{% endfor %}
+
+		</div>
+
+		{% endfor %}
+
+	</div>
+{% endblock %}

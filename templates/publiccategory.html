@@ -1,0 +1,15 @@
+{% extends "publicheader.html" %}
+{% block content %}
+
+	<div class="leftpane">
+		<h2>{{category.name}}</h2>
+		<p>{{category.description}}</p>	
+	</div>
+	<div class="rightpane">
+		<h2>Items</h2>
+		{% for item in items %}	
+		<a href = "{{url_for('showSpecificItem', category_name = category.name, item_name = item.name)}}"><h3>{{item.name}}</h3></a>
+		{% endfor %}
+	</div>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "header.html" %}
+{% block content %}
+
+<div class="center">
+	<span class="header__title">Edit {{item.name}}</span>
+
+	<form action="#" method = 'post'>
+		<dl>
+			<dt>Name:</dt>
+				<dd><input type ='text' size='30' name='name' placeholder="{{item.name}}"></dd>
+			<dt>Description:</dt>
+				<dd><textarea name = 'description' rows='5' cols='40' placeholder="{{item.description}}"></textarea></dd>
+			<dt>Price:</dt>
+				<dd><input type = 'text' size = '8' name='price' placeholder="{{item.price}}"></dd>
+			<dt>Category:</dt>
+			<select class="form__select" name="category_id">
+				{% for category in categories %}
+					<option value="{{category.id}}">{{category.name}}</option>
+				{% endfor %}
+			</select>
+		</dl>
+		<input type='submit' value='Update'>
+	</form>
+</div>
+{% endblock %}

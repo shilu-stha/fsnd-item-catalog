@@ -1,0 +1,16 @@
+{% extends "header.html" %}
+{% block content %}
+
+<div class="center">
+	<span class="header__title">Delete {{selectedItem.name}}</span>
+
+	<form action="#" method = 'post'>
+	<h3>Are you sure you want to delete {{selectedItem.name}}?</h3>
+
+	<a href="{{url_for('homePage')}}">Cancel</a>
+	<input type="submit" value="Delete">
+	</form>
+
+</div>
+
+{% endblock %}

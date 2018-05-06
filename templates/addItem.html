@@ -1,0 +1,30 @@
+{% extends "header.html" %}
+{% block content %}
+
+<div class="center">
+	
+	<span class="header__title">New Item</span>
+
+	<form action="#" method = 'post'>
+
+	<dl>
+		<dt>Name:</dt>
+			<dd><input type ='text' size='30' name='name'></dd>
+		<dt>Description:</dt>
+			<dd><textarea name = 'description' rows='5' cols='40'></textarea></dd>
+		<dt>Price:</dt>
+			<dd><input type = 'text' size = '8' name='price'></dd>
+		<dt>Category:</dt>
+			<dd><select class="form__select" name="category_id">
+				{% for category in categories %}
+					<option value="{{category.id}}">{{category.name}}</option>
+				{% endfor %}
+			</select></dd>
+	</dl>
+
+	<input type='submit' value='Create'>
+
+	</form>
+
+</div>
+{% endblock %}

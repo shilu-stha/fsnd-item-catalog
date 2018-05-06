@@ -3,55 +3,73 @@
 	<head>
 		<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
 		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script src="//apis.google.com/js/platform.js?onload=start"> </script>
+
 	</head>
 	<body>
-		<div class="banner main">
-			<img class="banner logo" src="static/banner-image.png"/>  
-			<h3>Login/SignUp</h3>          
-		</div>		
-		<button class="tablink" onclick="openPage('Login', this)" id="defaultOpen">Login</button>
-		<button class="tablink" onclick="openPage('SignUp', this)">SignUp</button>
-
-		<div class="container">
-			<div id="Login" class="tabcontent">
-  				<label for="uname"><b>Username</b></label>
-	      		<input type="text" placeholder="Enter Username" name="uname" required>
-
-	      		<label for="password"><b>Password</b></label>
-	      		<input type="password" placeholder="Enter Password" name="password" required>
-	        
-	      		<button type="submit">Login</button>
-			</div>
-
-			<div id="SignUp" class="tabcontent">
-			  	<label for="name"><b>Full Name</b></label>
-		      	<input type="text" placeholder="Enter Full Name" name="name" required>
-
-				<label for="uname"><b>Username</b></label>
-	      		<input type="text" placeholder="Enter Username" name="uname" required>
-
-	      		<label for="password"><b>Password</b></label>
-	      		<input type="password" placeholder="Enter Password" name="password" required>
-	        
-	      		<button type="submit">SignUp</button>
-			</div>
-			
-		</div>
 
 		<script>
-			function openPage(evt, cityName) {
-			    var i, tabcontent, tablinks;
-			    tabcontent = document.getElementsByClassName("tabcontent");
-			    for (i = 0; i < tabcontent.length; i++) {
-			        tabcontent[i].style.display = "none";
-			    }
-			    tablinks = document.getElementsByClassName("tablinks");
-			    for (i = 0; i < tablinks.length; i++) {
-			        tablinks[i].className = tablinks[i].className.replace(" active", "");
-			    }
-			    document.getElementById(cityName).style.display = "block";
-			    evt.currentTarget.className += " active";
+			function signInCallback(authResult) {
+				if (authResult['code']) {
+					// Hide the sign-in button now that the user is authorized
+					$('#signinButton').attr('style', 'display: none');
+
+					// Send the one-time-use code to the server, if the server responds, write a 'login successful' message to the web page and then redirect back to the main restaurants page
+					$.ajax({
+						type: 'POST',
+						url: '/gconnect?state={{STATE}}',
+						processData: false,
+						data: authResult['code'],
+						contentType: 'application/octet-stream; charset=utf-8',
+						success: function(result) {
+				        	// Handle or verify the server response if necessary.
+					        if (result) {
+					        	$('#login').html('Logging in...')
+								window.location.href = "/catalog";
+							} else if (authResult['error']) {
+								console.log('There was an error: ' + authResult['error']);
+							} else {
+								$('#login').html('Failed to make a server-side call. Check your configuration and console.');
+							}
+						}
+					});
+				}
 			}
 		</script>
+
+		<div class="banner">
+			<img class="logo" src="{{ url_for('static', filename='banner-image.png') }}"/>           
+			<div class="menu">
+				{%if 'username' not in session %}
+					<a href="{{url_for('login')}}" class="mainbutton" >
+						Login
+					</a>
+				{% else %}
+					<a href="{{url_for('logout')}}" class="mainbutton" >
+						Logout
+					</a>
+				{% endif %}
+			</div>
+		</div>
+		<div class="container">
+			<div class="center">
+				<span class="header__title">Login Using</span>
+
+				<div id="signInButton">
+					<span class="g-signin"
+						data-scope="openid email"
+						data-clientid="364186079119-26hpqm8ua64lqj59ato36cfjn01nb6l5.apps.googleusercontent.com"
+						data-redirecturi="postmessage"
+						data-accesstype="offline"
+						data-cookiepolicy="single_host_origin"
+						data-callback="signInCallback"
+						data-approvalprompt="force">
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
 	</body>
 </html>

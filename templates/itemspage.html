@@ -1,10 +1,15 @@
 {% extends "header.html" %}
 {% block content %}
 
-	<div>
+	<div class="center">
 		<h2>{{item.name}}</h2>
 		<br/>
 		<p>{{item.description}}</p>
+
+		{% if 'username' in session and item.user_id == session['user_id'] %}
+			<a href="{{url_for('editCategoryItem', item_name = item.name)}}">Edit</a>
+			<a href="{{url_for('deleteCategoryItem', item_name = item.name)}}" >Delete</a>
+		{% endif %}
 	</div>
 
 {% endblock %}

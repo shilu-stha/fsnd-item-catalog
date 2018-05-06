@@ -18,13 +18,9 @@ DBSession = sessionmaker(bind=engine)
 # session.rollback()
 session = DBSession()
 
-user1 = User(name = "Shilu Shrestha", username = "Shilu", password_hash = "1234567")
-session.add(user1)
-session.commit()
+user1 = User(name="Test User", email="test@udacity.com",
+             picture='https://testinsane.com/img/custom/Services/UX%20Testing_icons.png')
 
-user2 = User(name = "Test User", username = "test", password_hash = "123456")
-session.add(user2)
-session.commit()
 
 category1 = Category(name = "Soccer", description = "This is Soccer Category.It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.")
 session.add(category1)

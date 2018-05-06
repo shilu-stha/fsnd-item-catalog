@@ -1,38 +1,47 @@
 {% extends "header.html" %}
 {% block content %}
 
-	<a href="{{url_for('addNewItem')}}">
-		<button>
-			Add Item
-		</button>
-	</a>
-	<div class = 'leftpane'>
-		<h2>Categories</h2>
+	<div class="content">
+		<div class = 'leftpane'>
+			<span class="header__title">Categories</span>
 
-		{% for category in categories %}
-		<div>
-			<a href = "{{url_for('showCategoryAndItems', category_id = category.id, category_name = category.name)}}"><h3>{{category.name}}</h3></a>
+			<ul>
+				{% for category in categories %}
+					<a href = "{{url_for('showCategoryAndItems', category_id = category.id, category_name = category.name)}}">
+						<li class="items__item">
+							<span class="item__name">{{category.name}}</span>
+						</li>
+					</a>						
+				{% endfor %}
+				<li class="whitespace"></li>
+
+				<li>
+					{% if 'username' in session %}
+						<a href="{{url_for('addCategory')}}" class="sub__button">Add Category</a>
+					{% endif %}
+				</li>
+			</ul>
 		</div>
-		{% endfor %}
+		<div class = 'rightpane'>
+			<span class="header__title">Latest Items</span>
+			<ul>
+				{% for item in latest %}
+					<a href = "{{url_for('showSpecificItem', category_name = item.category.name, item_name = item.name)}}">
+						<li class="items__item">
+							<span class="item__name">{{item.name}}</span>
+							<span class="item__type">{{item.category.name}}</span>
+						</li>
+					</a>
+				{% endfor %}
+				<li class="whitespace"></li>
+				<li>
+					{% if 'username' in session %}
+						<a href="{{url_for('addCategoryItem')}}" class="sub__button">Add Item</a>
+					{% endif %}
 
-	</div>
-
-	<div class = 'rightpane'>
-		<h2>Latest Items</h2>
-
-		{% for item in latest %}
-		<div>
-			{% for category in categories %}
-				{% if item.category_id == category.id %}
-				<a href = "{{url_for('showSpecificItem', category_name = category.name, item_name = item.name)}}">
-					<h3>{{item.name}}({{category.name}})</h3>
-				</a>
-				{% endif %}
-			{% endfor %}
+				</li>
+			</ul>
 
 		</div>
-
-		{% endfor %}
-
 	</div>
 {% endblock %}

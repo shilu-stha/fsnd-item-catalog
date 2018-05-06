@@ -38,38 +38,66 @@ a {
 	font-weight: normal;
 }
 
-.banner.main {
-	height: 150px;
-	min-height: 56px;
-  
+ul {
+  list-style-type: none;
+}
+
+.banner{
+  height: 150px;
+  min-height: 56px;
   border-bottom: 5px solid #1DB100;
-  display: inline-flex;
+  background-color: #fff;
+  outline: none;
+  padding: 14px 16px;
+  transition: 0.3s;
+  align-content: center;    
 }
 
-.banner.logo {
+.logo {
 	height: 125px;
-  position: relative;
-  float: left;
-  width: 100%;
+	float: left;
 }
 
-.banner.text {
-	color: #1DB100;
-  display: inline-block;
-  text-align: right;
+.header__title {
+  color: #1DB100;
+  display: inline;
+  line-height: 5.2rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: .1rem;
+  text-transform: uppercase;
 }
 
-.banner.menu {
-	width: 25%;
-	position: relative;
-  float: right;
-  padding: 10px;
+.menu {
+	float: right;
+	padding: 10px;
 }
 
 /*    not necessary   */
-.banner.profile {
+.profile {
 	height: 150px;
 	background-color: #1DB100;
+}
+
+.container {
+  max-width: 80rem;;
+  background: #f4f5f6;
+  padding: 2rem;
+  border-bottom: .1rem solid #d1d1d1;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+}
+
+@media (min-width: 40.0rem) {
+  .container {
+    margin-top: 2rem;
+    border: .1rem solid #d1d1d1;
+  }
+}
+
+.content{
+  margin: 0 auto;
 }
 
 /*    side menu   */
@@ -77,17 +105,64 @@ a {
   position: relative;
   float: left;
   width: 40%;
+  margin-left: 10px 5px 20px 5px;
 }
 
 .rightpane {
   position: relative;
   float: right;
-  width: 40%;
+  margin-left: 10px 5px 20px 5px;
+}
+
+.mainbutton {
+    display: block;
+    text-align: center;
+    border-radius: 5px;
+    font-weight: bold;
+    border: none;
+    background-color: #ff9800;
+    color: white;
+    padding: 10px 25px;
+    font-size: 20px;
+    cursor: pointer;
+}   
+
+.sub__button{
+    display: block;
+    width: 5rem;
+    border-radius: 2px;
+    text-align: center;
+    background-color: #ff9800;
+    color: white;
+    padding: 5px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.items__item .item__name {
+  text-transform: capitalize;
+  font-size: 16px;
+}
+
+.items__item .item__type {
+  color: #606c76;
+  font-style: italic;
+  text-transform: capitalize;
+}
+
+.item__modify {
+  color: #606c76;
+  text-transform: capitalize;
+  margin:4px;
+}
+
+.login__content{
+  position: absolute;
 }
 
 .nav {
     width: 40%;
-  	padding: 5px; 
+    padding: 5px; 
     margin: 5px; 
     border-right: 5px solid #1DB100;
     text-align: left;
@@ -108,39 +183,47 @@ a {
     text-decoration: underline;
 }
 
-.btn {
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+    background-color: inherit;
+    float: left;
     border: none;
-    background-color: #ff9800;
-    color: white;
-    padding: 10px 25px;
-    margin-bottom: 5px
-    font-size: 16px;
+    outline: none;
     cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
 }
 
-/* Style tab links */
-.tablink {
-  background-color: #555;
-  color: white;
-  float: left;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
-  font-size: 17px;
-  width: 25%;
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
 }
 
-.tablink:hover {
-  background-color: #777;
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #ccc;
 }
+
 
 /* Style the tab content (and add height:100% for full page content) */
 .tabcontent {
-  color: white;
+  color: transparent;
   display: none;
   padding: 100px 20px;
   height: 100%;
+}
+
+.labeltext {
+  color: #000;
+  text-align: left;
 }
 
 #Login {
@@ -151,9 +234,6 @@ a {
   background-color: green;
 }
 
-.container {
-	display: flex;
-}
 
 .flash {
 	background-color: #98FB98;

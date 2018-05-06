@@ -23,7 +23,7 @@ Then move inside the catalog folder:
 
 `cd /vagrant/catalog`
 
-Preload the database with contents:
+To preload the database with contents:
 
 `python catagoriesanditems.py`
 
